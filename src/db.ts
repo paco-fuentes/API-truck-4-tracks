@@ -1,6 +1,7 @@
 import "reflect-metadata";
 import 'dotenv/config';
 import { DataSource } from "typeorm";
+import { User1702398403074 } from "./migration/1702398403074-user";
 
 type database = "mysql" | "mariadb";
 
@@ -12,7 +13,9 @@ export const AppDataSource = new DataSource({
     password: process.env.DB_PASSWORD,
     database: process.env.DB_NAME,
     entities: [],
-    migrations: [],
+    migrations: [
+        User1702398403074
+    ],
     synchronize: false,
     logging: false,
   });
