@@ -2,7 +2,7 @@
   "name": "backend-truck-4-tracks",
   "version": "1.0.0",
   "description": "express API backend for truck4tracks app.",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/server.ts",
