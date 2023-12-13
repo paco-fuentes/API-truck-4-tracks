@@ -2,8 +2,14 @@
 
 <img src="./img/prelogo-1.png" align= "center"/>
 
+---
+
 ## About the Project
-Backend API of crud management system for a sound and music social network MVP.
+API for CRUD management system for a sound and music social network MVP.
+
+<img src="./img/db-diagram.png" align= "center"/>
+
+---
 
 ## Deploy 🚀
 <div align="center">
