@@ -16,7 +16,7 @@ export class CreateUserActivitiesTable1702409963272
             generationStrategy: "increment",
           },
           {
-            name: "genre_name",
+            name: "activity",
             type: "varchar",
             isUnique: true,
             length: "50",

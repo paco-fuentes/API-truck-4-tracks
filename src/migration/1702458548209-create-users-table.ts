@@ -21,6 +21,7 @@ export class CreateUsersTable1702458548209 implements MigrationInterface {
             name: "username",
             type: "varchar",
             length: "50",
+            isUnique: true,
           },
           {
             name: "img_url",
