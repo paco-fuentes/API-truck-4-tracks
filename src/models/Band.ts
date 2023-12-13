@@ -1,4 +1,18 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./User";
+import { GenreBand } from "./GenreBand";
+import { BandMember } from "./BandMember";
+import { BandMessage } from "./BandMessage";
+import { BandMultitrack } from "./BandMultitrack";
+import { Song } from "./Song";
 
 @Entity("bands")
 export class Band extends BaseEntity {
@@ -28,4 +42,23 @@ export class Band extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "band_leader" })
+  leader!: User;
+
+  @OneToMany(() => GenreBand, (genreBand) => genreBand.band)
+  genres!: GenreBand[];
+
+  @OneToMany(() => BandMember, (bandMember) => bandMember.band)
+  members!: BandMember[];
+
+  @OneToMany(() => BandMessage, (bandMessage) => bandMessage.band)
+  messages!: BandMessage[];
+
+  @OneToMany(() => BandMultitrack, (bandMultitrack) => bandMultitrack.band)
+  multitracks!: BandMultitrack[];
+
+  @OneToMany(() => Song, (song) => song.band)
+  songs!: Song[];
 }

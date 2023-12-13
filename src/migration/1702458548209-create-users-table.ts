@@ -14,6 +14,11 @@ export class CreateUsersTable1702458548209 implements MigrationInterface {
             generationStrategy: "increment",
           },
           {
+            name: "role_id",
+            type: "int",
+            default: 1,
+          },
+          {
             name: "activity_id",
             type: "int",
           },
@@ -22,12 +27,6 @@ export class CreateUsersTable1702458548209 implements MigrationInterface {
             type: "varchar",
             length: "50",
             isUnique: true,
-          },
-          {
-            name: "img_url",
-            type: "varchar",
-            length: "255",
-            default: '"../img/def-user-img.jpeg"',
           },
           {
             name: "email",
@@ -41,9 +40,10 @@ export class CreateUsersTable1702458548209 implements MigrationInterface {
             length: "255",
           },
           {
-            name: "role_id",
-            type: "int",
-            default: 1,
+            name: "img_url",
+            type: "varchar",
+            length: "255",
+            default: '"../img/def-user-img.jpeg"',
           },
           {
             name: "is_active",

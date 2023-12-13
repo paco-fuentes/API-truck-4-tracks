@@ -1,4 +1,14 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Band } from "./Band";
+import { Track } from "./Track";
 
 @Entity("band_multitrack")
 export class BandMultitrack extends BaseEntity {
@@ -22,4 +32,11 @@ export class BandMultitrack extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @ManyToOne(() => Band)
+  @JoinColumn({ name: "band_id" })
+  band!: Band;
+
+  @OneToMany(() => Track, (track) => track.multitrack)
+  tracks!: Track[];
 }

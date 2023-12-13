@@ -1,4 +1,13 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Band } from "./Band";
+import { User } from "./User";
 
 @Entity("band_messages")
 export class BandMessage extends BaseEntity {
@@ -22,4 +31,12 @@ export class BandMessage extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @ManyToOne(() => Band)
+  @JoinColumn({ name: "band_id" })
+  band!: Band;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  user!: User;
 }

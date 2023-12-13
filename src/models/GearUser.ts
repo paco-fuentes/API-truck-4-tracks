@@ -1,4 +1,13 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./User";
+import { Gear } from "./Gear";
 
 @Entity("gear_users")
 export class GearUser extends BaseEntity {
@@ -19,4 +28,12 @@ export class GearUser extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @ManyToOne(() => User)
+  @JoinColumn({ name: "user_id" })
+  user!: User;
+
+  @ManyToOne(() => Gear)
+  @JoinColumn({ name: "gear_id" })
+  gear!: Gear;
 }

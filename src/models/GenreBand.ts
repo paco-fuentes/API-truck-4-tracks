@@ -1,4 +1,13 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { Band } from "./Band";
+import { Genre } from "./Genre";
 
 @Entity("genres_band")
 export class GenreBand extends BaseEntity {
@@ -19,4 +28,12 @@ export class GenreBand extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @ManyToOne(() => Band)
+  @JoinColumn({ name: "band_id" })
+  band!: Band;
+
+  @ManyToOne(() => Genre)
+  @JoinColumn({ name: "genre_id" })
+  genre!: Genre;
 }

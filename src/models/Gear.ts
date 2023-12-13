@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { GearUser } from "./GearUser";
 
 @Entity("gear")
 export class Gear extends BaseEntity {
@@ -19,4 +26,7 @@ export class Gear extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @OneToMany(() => GearUser, (gearUser) => gearUser.gear)
+  gearUsers!: GearUser[];
 }

@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from "typeorm";
+import { User } from "./User";
 
 @Entity("user_activities")
 export class UserActivity extends BaseEntity {
@@ -16,4 +23,7 @@ export class UserActivity extends BaseEntity {
 
   @Column()
   updated_at!: Date;
+
+  @OneToMany(() => User, (user) => user.activity)
+  users!: User[];
 }
