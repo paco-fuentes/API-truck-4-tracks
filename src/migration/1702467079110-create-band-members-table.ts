@@ -52,6 +52,12 @@ export class CreateBandMembersTable1702467079110 implements MigrationInterface {
             onDelete: "CASCADE",
           },
         ],
+        indices: [
+          {
+            columnNames: ["band_id", "user_id"],
+            isUnique: true,
+          },
+        ],
       }),
       true
     );

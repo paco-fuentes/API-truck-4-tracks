@@ -69,6 +69,12 @@ export class CreateTracksTable1702467751643 implements MigrationInterface {
             onDelete: "CASCADE",
           },
         ],
+        indices: [
+          {
+            columnNames: ["multitrack_id", "track_url"],
+            isUnique: true,
+          },
+        ],
       }),
       true
     );
