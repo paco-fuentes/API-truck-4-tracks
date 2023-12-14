@@ -14,6 +14,19 @@ import { CreateBandMessagesTable1702467368173 } from "./migration/1702467368173-
 import { CreateBandMultitrackTable1702467551656 } from "./migration/1702467551656-create-band-multitrack-table";
 import { CreateTracksTable1702467751643 } from "./migration/1702467751643-create-tracks-table";
 import { CreateSongsTable1702468040447 } from "./migration/1702468040447-create-songs-table";
+import { Band } from "./models/Band";
+import { BandMember } from "./models/BandMember";
+import { BandMessage } from "./models/BandMessage";
+import { BandMultitrack } from "./models/BandMultitrack";
+import { Gear } from "./models/Gear";
+import { GearUser } from "./models/GearUser";
+import { Genre } from "./models/Genre";
+import { GenreBand } from "./models/GenreBand";
+import { Song } from "./models/Song";
+import { SystemRole } from "./models/SystemRole";
+import { Track } from "./models/Track";
+import { User } from "./models/User";
+import { UserActivity } from "./models/UserActivity";
 
 type database = "mysql";
 
@@ -24,7 +37,21 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  entities: [],
+  entities: [
+    Band,
+    BandMember,
+    BandMessage,
+    BandMultitrack,
+    Gear,
+    GearUser,
+    Genre,
+    GenreBand,
+    Song,
+    SystemRole,
+    Track,
+    User,
+    UserActivity,
+  ],
   migrations: [
     CreateSystemRolesTable1702409306830,
     CreateGearTable1702409350832,
