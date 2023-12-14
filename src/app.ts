@@ -1,6 +1,10 @@
 import express from "express";
 import cors from "cors";
 
+// routes
+import { router as routerUser } from "./routes/userRoutes";
+
+// express on const app
 const app = express();
 
 // middlewares
@@ -16,5 +20,7 @@ app.get("/api/healthycat", (req, res) => {
     </body>`
   );
 });
+
+app.use("/api/user", routerUser);
 
 export default app;

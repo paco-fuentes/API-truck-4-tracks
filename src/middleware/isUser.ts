@@ -1,8 +1,9 @@
 import { NextFunction, Request, Response } from "express";
 
 const isUser = (req: Request, res: Response, next: NextFunction) => {
-  if (req.token.role !== "user") {
-    return res.json("You mus be logged");
+  const userRoleId = parseInt(req.token.role);
+  if (userRoleId !== 1) {
+    return res.json("You must be logged");
   }
   next();
 };

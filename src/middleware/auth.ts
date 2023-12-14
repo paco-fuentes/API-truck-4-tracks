@@ -24,6 +24,7 @@ const auth = (req: Request, res: Response, next: NextFunction) => {
     ) as TokenDecoded;
 
     req.token = tokenDecoded;
+    
     next();
 
   } catch (error) {
