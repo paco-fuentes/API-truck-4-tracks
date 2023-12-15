@@ -94,7 +94,7 @@ const profile = async (req: Request, res: Response) => {
       where: { id: req.token.id },
       relations: ["activity"],
     });
-    
+
     return res.json({
       success: true,
       message: "profile user retrieved",
