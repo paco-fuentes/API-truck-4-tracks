@@ -16,8 +16,8 @@ export class CreateGenresTable1702409381753 implements MigrationInterface {
           {
             name: "genre_name",
             type: "varchar",
-            isUnique: true,
             length: "50",
+            isUnique: true,
           },
           {
             name: "is_active",

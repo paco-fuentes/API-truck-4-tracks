@@ -16,8 +16,8 @@ export class CreateSystemRolesTable1702409306830 implements MigrationInterface {
           {
             name: "system_role",
             type: "varchar",
+            length: "20",
             isUnique: true,
-            length: "50",
           },
           {
             name: "is_active",

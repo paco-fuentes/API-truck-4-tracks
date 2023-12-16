@@ -25,13 +25,12 @@ export class CreateTracksTable1702467751643 implements MigrationInterface {
             name: "track_name",
             type: "varchar",
             length: "127",
-            isNullable: true,
           },
           {
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"../img/def-track-img.jpeg"',
+            default: '"./public/img_def_user/def-track-img.jpeg"',
           },
           {
             name: "track_url",

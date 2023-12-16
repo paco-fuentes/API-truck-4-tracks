@@ -19,7 +19,7 @@ export class CreateUserActivitiesTable1702409963272
             name: "activity",
             type: "varchar",
             isUnique: true,
-            length: "50",
+            length: "30",
           },
           {
             name: "is_active",

@@ -16,8 +16,8 @@ export class CreateGearTable1702409350832 implements MigrationInterface {
           {
             name: "gear_name",
             type: "varchar",
-            isUnique: true,
             length: "100",
+            isUnique: true,
           },
           {
             name: "gear_type",

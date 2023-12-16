@@ -27,7 +27,6 @@ export class CreateBandMessagesTable1702467368173
             name: "message",
             type: "varchar",
             length: "511",
-            isNullable: true,
           },
           {
             name: "is_active",

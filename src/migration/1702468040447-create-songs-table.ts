@@ -21,12 +21,13 @@ export class CreateSongsTable1702468040447 implements MigrationInterface {
             name: "song_name",
             type: "varchar",
             length: "127",
+            isUnique: true,
           },
           {
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"../img/def-song-img.jpeg"',
+            default: '"./public/img_def_user/def-song-img.jpeg"',
           },
           {
             name: "track_url",
