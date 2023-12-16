@@ -21,6 +21,7 @@ export class CreateBandsTable1702459458467 implements MigrationInterface {
             name: "band_name",
             type: "varchar",
             length: "127",
+            isUnique: true,
           },
           {
             name: "about",

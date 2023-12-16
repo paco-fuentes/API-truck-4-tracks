@@ -3,6 +3,7 @@ import cors from "cors";
 
 // routes
 import { router as routerUser } from "./routes/userRoutes";
+import { router as routerBand} from "./routes/bandRoutes";
 
 // express on const app
 const app = express();
@@ -22,5 +23,6 @@ app.get("/api/healthycat", (req, res) => {
 });
 
 app.use("/api/user", routerUser);
+app.use("/api/band", routerBand);
 
 export default app;
