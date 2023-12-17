@@ -1,5 +1,6 @@
 import { Response, Request } from "express";
 import { Band } from "../models/Band";
+import { User } from "../models/User";
 
 const createBand = async (req: Request, res: Response) => {
   try {
@@ -27,7 +28,7 @@ const createBand = async (req: Request, res: Response) => {
     });
   } catch (error) {
     console.log();
-    
+
     return res.status(500).json({
       success: false,
       message: "Band can't be created",
@@ -36,4 +37,23 @@ const createBand = async (req: Request, res: Response) => {
   }
 };
 
-export { createBand };
+const getUserBandByTokenId = async (req: Request, res: Response) => {
+  try {
+    const user_id = req.token.id;
+    const userBand = await Band.findOne({ where: { band_leader: user_id } });
+
+    return res.json({
+      success: true,
+      message: "Band retrieved successfully",
+      data: userBand,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Band can't be retrieved",
+      error: error,
+    });
+  }
+};
+
+export { createBand, getUserBandByTokenId };
