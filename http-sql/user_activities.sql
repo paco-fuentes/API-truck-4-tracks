@@ -1,3 +1,5 @@
+use `truck4tracks-db`;
+
 INSERT INTO `user_activities` (`activity`) VALUES ('Musician');
 INSERT INTO `user_activities` (`activity`) VALUES ('Sound Artist');
 INSERT INTO `user_activities` (`activity`) VALUES ('Producer');
