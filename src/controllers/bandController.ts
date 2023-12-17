@@ -90,4 +90,48 @@ const getUserBandByTokenId = async (req: Request, res: Response) => {
   }
 };
 
-export { createBand, getUserBandByTokenId };
+const getAllBands = async (req: Request, res: Response) => {
+  try {
+    const bands = await Band.find();
+
+    return res.json({
+      success: true,
+      message: "All bands retrieved successfully",
+      data: bands,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Bands can't be retrieved",
+      error: error,
+    });
+  }
+};
+
+const getBandById = async (req: Request, res: Response) => {
+  try {
+    const band_id = req.body.band_id;
+    const band = await Band.findOneBy(band_id);
+
+    if (!band) {
+      return res.status(404).json({
+        success: false,
+        message: "Band not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Band retrieved successfully",
+      data: band,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Band can't be retrieved",
+      error: error,
+    });
+  }
+};
+
+export { createBand, getUserBandByTokenId, getAllBands, getBandById };
