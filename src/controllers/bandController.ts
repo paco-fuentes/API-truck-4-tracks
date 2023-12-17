@@ -3,6 +3,7 @@ import { Band } from "../models/Band";
 import { BandMultitrack } from "../models/BandMultitrack";
 import { Track } from "../models/Track";
 import { BandMember } from "../models/BandMember";
+import { GenreBand } from "../models/GenreBand";
 // import { User } from "../models/User";
 
 const createBand = async (req: Request, res: Response) => {
@@ -92,12 +93,39 @@ const getUserBandByTokenId = async (req: Request, res: Response) => {
 
 const getAllBands = async (req: Request, res: Response) => {
   try {
-    const bands = await Band.find();
+    const bands = await Band.find({ relations: ["leader"] });
+    const formattedBands = await Promise.all(
+      bands.map(async (band) => {
+        const genreBands = await GenreBand.find({
+          where: { band: { id: band.id } },
+          relations: ["genre"],
+        });
+        const genreNames = genreBands.map(
+          (genreBand) => genreBand.genre?.genre_name
+        );
+
+        return {
+          id: band.id,
+          band_name: band.band_name,
+          about: band.about,
+          img_url: band.img_url,
+          hiring: band.hiring,
+          is_active: band.is_active,
+          created_at: band.created_at,
+          updated_at: band.updated_at,
+          band_leader: {
+            id: band.leader.id,
+            username: band.leader.username,
+          },
+          genre_names: genreNames,
+        };
+      })
+    );
 
     return res.json({
       success: true,
       message: "All bands retrieved successfully",
-      data: bands,
+      data: formattedBands,
     });
   } catch (error) {
     return res.status(500).json({
@@ -107,6 +135,24 @@ const getAllBands = async (req: Request, res: Response) => {
     });
   }
 };
+
+// const getAllBands = async (req: Request, res: Response) => {
+//   try {
+//     const bands = await Band.find();
+
+//     return res.json({
+//       success: true,
+//       message: "All bands retrieved successfully",
+//       data: bands,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Bands can't be retrieved",
+//       error: error,
+//     });
+//   }
+// };
 
 const getBandById = async (req: Request, res: Response) => {
   try {
