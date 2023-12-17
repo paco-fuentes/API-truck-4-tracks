@@ -40,7 +40,9 @@ router.get("/myband", auth, isUser, getUserBandByTokenId);
 
 // get all bands
 router.get("/all", getAllBands);
+// get bandByBodyId
+// router.get("/selected", getBandById);
 // get bandById
-router.get("/selected", getBandById);
+router.get("/:id", getBandById);
 
 export { router };

@@ -154,7 +154,7 @@ const getAllBands = async (req: Request, res: Response) => {
 //   }
 // };
 
-const getBandById = async (req: Request, res: Response) => {
+const getBandByBodyId = async (req: Request, res: Response) => {
   try {
     const band_id = req.body.band_id;
     const band = await Band.findOneBy(band_id);
@@ -180,4 +180,34 @@ const getBandById = async (req: Request, res: Response) => {
   }
 };
 
-export { createBand, getUserBandByTokenId, getAllBands, getBandById };
+const getBandById = async (req: Request, res: Response) => {
+  try {
+    const band_id = req.params.id;
+    console.log(band_id);
+
+    const band = await Band.findOne({
+      where: { id:parseInt(band_id as string) },
+    });
+
+    if (!band) {
+      return res.status(404).json({
+        success: false,
+        message: "Band not found",
+      });
+    }
+
+    return res.json({
+      success: true,
+      message: "Band retrieved successfully",
+      data: band,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Band can't be retrieved",
+      error: error,
+    });
+  }
+};
+
+export { createBand, getUserBandByTokenId, getAllBands, getBandById, getBandByBodyId };
