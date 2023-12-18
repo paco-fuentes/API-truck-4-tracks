@@ -33,7 +33,7 @@ export class CreateBandsTable1702459458467 implements MigrationInterface {
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"./public/img_def_user/def-band-img.jpeg"',
+            default: '"/img_def_user/def-band-img.jpeg"',
           },
           {
             name: "hiring",

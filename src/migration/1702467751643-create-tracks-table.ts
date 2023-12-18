@@ -30,7 +30,7 @@ export class CreateTracksTable1702467751643 implements MigrationInterface {
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"./public/img_def_user/def-track-img.jpeg"',
+            default: '"/img_def_user/def-track-img.jpeg"',
           },
           {
             name: "track_url",

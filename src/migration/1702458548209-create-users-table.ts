@@ -43,7 +43,7 @@ export class CreateUsersTable1702458548209 implements MigrationInterface {
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"./public/img_def_user/def-user-img.jpeg"',
+            default: '"/img_def_user/def-user-img.jpeg"',
           },
           {
             name: "is_active",

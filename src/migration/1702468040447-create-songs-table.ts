@@ -27,7 +27,7 @@ export class CreateSongsTable1702468040447 implements MigrationInterface {
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"./public/img_def_user/def-song-img.jpeg"',
+            default: '"/img_def_user/def-song-img.jpeg"',
           },
           {
             name: "track_url",

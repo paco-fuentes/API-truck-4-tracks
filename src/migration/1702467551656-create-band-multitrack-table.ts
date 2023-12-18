@@ -28,7 +28,7 @@ export class CreateBandMultitrackTable1702467551656
             name: "img_url",
             type: "varchar",
             length: "255",
-            default: '"./public/img_def_user/def-multitrack-img.jpeg"',
+            default: '"/img_def_user/def-multitrack-img.jpeg"',
           },
           {
             name: "is_active",
