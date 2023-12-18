@@ -196,10 +196,25 @@ const getBandById = async (req: Request, res: Response) => {
       });
     }
 
+    const bandMultitracks = await BandMultitrack.find({
+      where: { id: band_id as any},
+    });
+    const trackPromises = bandMultitracks.map(async (multitrack) => {
+      const tracks = await Track.find({
+        where: { multitrack_id: multitrack.id },
+      });
+      return { multitrack, tracks };
+    });
+
+    const bandMultitracksWithTracks = await Promise.all(trackPromises);
+
     return res.json({
       success: true,
       message: "Band retrieved successfully",
-      data: band,
+      data: {
+        band: band,
+        multitracks: bandMultitracksWithTracks,
+      },
     });
   } catch (error) {
     return res.status(500).json({
