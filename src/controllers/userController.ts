@@ -5,7 +5,7 @@ import bcrypt from "bcrypt";
 import { User } from "../models/User";
 import { BandMember } from "../models/BandMember";
 import { Band } from "../models/Band";
-import { QueryFailedError } from "typeorm";
+// import { QueryFailedError } from "typeorm";
 
 const register = async (req: Request, res: Response) => {
   try {
