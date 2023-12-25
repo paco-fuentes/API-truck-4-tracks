@@ -237,32 +237,55 @@ const leaveBand = async (req: Request, res: Response) => {
   }
 };
 
+// const getBandMembers = async (req: Request, res: Response) => {
+//   try {
+//     console.log(req.token);
+//     const bandLeaderId = req.token?.id;
+//     console.log(bandLeaderId);
+
+//     if (bandLeaderId === undefined) {
+//       return res.status(403).json({
+//         success: false,
+//         message: "Invalid band leader. Access denied.",
+//       });
+//     }
+
+//     const bandId = parseInt(req.params.band_id, 10);
+
+//     const isBandLeader = await Band.findOneBy({
+//       id: bandId,
+//       band_leader: bandLeaderId,
+//     });
+
+//     if (!isBandLeader) {
+//       return res.status(403).json({
+//         success: false,
+//         message: "You are not the band leader. Access denied.",
+//       });
+//     }
+
+//     const bandMembers = await BandMember.find({
+//       where: { band: { id: bandId } },
+//       relations: ["user"],
+//     });
+
+//     return res.json({
+//       success: true,
+//       message: "Band members retrieved successfully",
+//       bandMembers: bandMembers,
+//     });
+//   } catch (error) {
+//     return res.status(500).json({
+//       success: false,
+//       message: "Failed to retrieve band members",
+//       error: error,
+//     });
+//   }
+// };
+
 const getBandMembers = async (req: Request, res: Response) => {
   try {
-    console.log(req.token);
-    const bandLeaderId = req.token?.id;
-    console.log(bandLeaderId);
-
-    if (bandLeaderId === undefined) {
-      return res.status(403).json({
-        success: false,
-        message: "Invalid band leader. Access denied.",
-      });
-    }
-
-    const bandId = parseInt(req.params.band_id, 10);
-
-    const isBandLeader = await Band.findOneBy({
-      id: bandId,
-      band_leader: bandLeaderId,
-    });
-
-    if (!isBandLeader) {
-      return res.status(403).json({
-        success: false,
-        message: "You are not the band leader. Access denied.",
-      });
-    }
+    const bandId = parseInt(req.params.band_id);
 
     const bandMembers = await BandMember.find({
       where: { band: { id: bandId } },
@@ -283,6 +306,39 @@ const getBandMembers = async (req: Request, res: Response) => {
   }
 };
 
+const checkIsBandMember = async (req: Request, res: Response) => {
+  try {
+    const bandId = parseInt(req.params.id);
+    const userId = req.token.id;
+    console.log(bandId, userId);
+    
+
+    const bandMember = await BandMember.find({
+      where: { band_id: bandId, user_id: userId },
+    });
+
+    if (bandMember.length>0) {
+      return res.json({
+        success: true,
+        message: "Is a band memberr",
+        bandMember: !!bandMember,
+      });
+    }
+
+    return res.json({
+      success: false,
+      message: "Not a band member",
+      bandMember: !bandMember,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Failed to check is band member",
+      error: error,
+    });
+  }
+};
+
 const kickBandMember = async (req: Request, res: Response) => {
   try {
     const bandId = req.body.band_id;
@@ -294,7 +350,7 @@ const kickBandMember = async (req: Request, res: Response) => {
 
     const band = await Band.findOne({
       where: { id: bandId },
-      relations: ['members', 'members.user'],
+      relations: ["members", "members.user"],
     });
 
     if (!band) {
@@ -317,7 +373,9 @@ const kickBandMember = async (req: Request, res: Response) => {
 
     console.log("All Band Members:", band.members);
 
-    const bandMember = band.members.find(member => member.user && member.user.id === userId);
+    const bandMember = band.members.find(
+      (member) => member.user && member.user.id === userId
+    );
 
     console.log("Found Band Member:", bandMember);
 
@@ -335,11 +393,11 @@ const kickBandMember = async (req: Request, res: Response) => {
       message: "User kicked from the band successfully",
     });
   } catch (error) {
-    console.error('Error:', error);
+    console.error("Error:", error);
 
     return res.status(500).json({
       success: false,
-      message: 'Failed to kick user from the band',
+      message: "Failed to kick user from the band",
       // error: error.message,
     });
   }
@@ -354,4 +412,5 @@ export {
   leaveBand,
   getBandMembers,
   kickBandMember,
+  checkIsBandMember,
 };

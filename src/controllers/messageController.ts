@@ -7,7 +7,11 @@ const postMessage = async (req: Request, res: Response) => {
     const userId = req.token.id;
     const bandId = parseInt(req.params.id);
     const { message } = req.body;
-    // console.log(bandId, userId, message);
+    console.log(
+      "band id: " + bandId,
+      "user id: " + userId,
+      "mensaje: " + message
+    );
 
     const isMember = await BandMember.findOne({
       where: { user_id: userId, band_id: bandId },

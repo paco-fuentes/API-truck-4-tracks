@@ -1,5 +1,6 @@
 import { Router } from "express";
 import {
+  checkIsBandMember,
   getBandMembers,
   joinBand,
   kickBandMember,
@@ -30,5 +31,9 @@ router.post("/leaveband", auth, isUser, leaveBand);
 
 // kick band member as band leader
 router.post("/kickmember", auth, isUser, kickBandMember);
+
+// isMember
+router.get("/ismember/:id", auth, isUser, checkIsBandMember);
+
 
 export { router };
