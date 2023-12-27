@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   checkIsBandMember,
   getBandMembers,
+  getUserActivities,
   joinBand,
   kickBandMember,
   leaveBand,
@@ -35,5 +36,7 @@ router.post("/kickmember", auth, isUser, kickBandMember);
 // isMember
 router.get("/ismember/:id", auth, isUser, checkIsBandMember);
 
+// userActivities
+router.get("/allactivities", getUserActivities);
 
 export { router };

@@ -5,7 +5,34 @@ import bcrypt from "bcrypt";
 import { User } from "../models/User";
 import { BandMember } from "../models/BandMember";
 import { Band } from "../models/Band";
+import { UserActivity } from "../models/UserActivity";
 // import { QueryFailedError } from "typeorm";
+
+const getUserActivities = async (req: Request, res: Response) => {
+  try {
+    const id = req.body.id;
+    const activity = req.body.activity;
+
+    const allActivities = await UserActivity.find({
+      where: {
+        id,
+        activity,
+      },
+    });
+
+    return res.json({
+      success: true,
+      message: "All activities retrieved",
+      data: allActivities,
+    });
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: "Activities can't be retrieved",
+      error: error,
+    });
+  }
+};
 
 const register = async (req: Request, res: Response) => {
   try {
@@ -123,6 +150,9 @@ const updateProfile = async (req: Request, res: Response) => {
     const is_active = req.body.is_active;
 
     const user = await User.findOneBy({ id: req.token.id });
+
+    console.log(req.body);
+    
 
     if (!user) {
       return res.status(404).json({
@@ -311,13 +341,12 @@ const checkIsBandMember = async (req: Request, res: Response) => {
     const bandId = parseInt(req.params.id);
     const userId = req.token.id;
     console.log(bandId, userId);
-    
 
     const bandMember = await BandMember.find({
       where: { band_id: bandId, user_id: userId },
     });
 
-    if (bandMember.length>0) {
+    if (bandMember.length > 0) {
       return res.json({
         success: true,
         message: "Is a band memberr",
@@ -413,4 +442,5 @@ export {
   getBandMembers,
   kickBandMember,
   checkIsBandMember,
+  getUserActivities,
 };

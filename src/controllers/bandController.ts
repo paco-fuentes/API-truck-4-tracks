@@ -4,7 +4,6 @@ import { BandMultitrack } from "../models/BandMultitrack";
 import { Track } from "../models/Track";
 import { BandMember } from "../models/BandMember";
 import { GenreBand } from "../models/GenreBand";
-// import { User } from "../models/User";
 
 const createBand = async (req: Request, res: Response) => {
   try {
@@ -16,6 +15,8 @@ const createBand = async (req: Request, res: Response) => {
     const hiring = req.body.hiring;
     const is_active = req.body.is_active;
 
+    console.log(req.body);
+
     // create band
     const newBand = await Band.create({
       band_leader: band_leader,
@@ -26,7 +27,7 @@ const createBand = async (req: Request, res: Response) => {
       is_active: is_active,
     }).save();
 
-    // suscribe as a member
+    // create and member
     const bandMember = await BandMember.create({
       band_id: newBand.id,
       user_id: band_leader,
