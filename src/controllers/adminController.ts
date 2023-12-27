@@ -5,7 +5,7 @@ const getAllusers = async (req: Request, res: Response) => {
     try {
         const id = req.body.id;
     
-        const allActivities = await User.find({
+        const allUsers = await User.find({
           where: {
             id,
           },
@@ -14,7 +14,7 @@ const getAllusers = async (req: Request, res: Response) => {
         return res.json({
           success: true,
           message: "All users retrieved",
-          data: allActivities,
+          data: allUsers,
         });
       } catch (error) {
         return res.status(500).json({
@@ -25,4 +25,35 @@ const getAllusers = async (req: Request, res: Response) => {
       }
 };
 
-export { getAllusers };
+const deleteUserById = async (req: Request, res: Response) => {
+    try {
+        const id = req.body.id;
+    
+        const userToRemove = await User.findOneBy({
+            id
+        });
+
+        if (!userToRemove) {
+            return res.status(404).json({
+              success: false,
+              message: "User to remove not found or you don't have permission to delete it",
+            });
+          }
+
+        await userToRemove.remove();
+    
+        return res.json({
+          success: true,
+          message: "User deleted succesfully",
+          data: userToRemove,
+        });
+      } catch (error) {
+        return res.status(500).json({
+          success: false,
+          message: "User can't be deleted",
+          error: error,
+        });
+      }
+};
+
+export { getAllusers, deleteUserById };

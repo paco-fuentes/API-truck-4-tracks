@@ -20,7 +20,7 @@ const postMessage = async (req: Request, res: Response) => {
     if (!isMember) {
       return res.status(403).json({
         success: false,
-        message: "You are not a member of the band. Access denied.",
+        message: "You are not a member of the band",
       });
     }
 
