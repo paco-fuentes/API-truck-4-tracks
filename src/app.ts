@@ -3,8 +3,9 @@ import cors from "cors";
 
 // routes
 import { router as routerUser } from "./routes/userRoutes";
-import { router as routerBand} from "./routes/bandRoutes";
-import { router as routerMessage} from "./routes/messageRoutes";
+import { router as routerBand } from "./routes/bandRoutes";
+import { router as routerMessage } from "./routes/messageRoutes";
+import { router as routerAdmin } from "./routes/adminRoutes";
 
 // express on const app
 const app = express();
@@ -26,6 +27,6 @@ app.get("/api/healthycat", (req, res) => {
 app.use("/api/user", routerUser);
 app.use("/api/band", routerBand);
 app.use("/api/messages", routerMessage);
-
+app.use("/api/admin", routerAdmin);
 
 export default app;
