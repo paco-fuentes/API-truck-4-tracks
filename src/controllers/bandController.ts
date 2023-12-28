@@ -198,7 +198,7 @@ const getBandById = async (req: Request, res: Response) => {
     }
 
     const bandMultitracks = await BandMultitrack.find({
-      where: { id: band_id as any},
+      where: { band_id: band_id as any},
     });
     const trackPromises = bandMultitracks.map(async (multitrack) => {
       const tracks = await Track.find({
