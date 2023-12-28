@@ -6,6 +6,7 @@ import { router as routerUser } from "./routes/userRoutes";
 import { router as routerBand } from "./routes/bandRoutes";
 import { router as routerMessage } from "./routes/messageRoutes";
 import { router as routerAdmin } from "./routes/adminRoutes";
+import { router as routerMultitrack } from "./routes/multitrackRoutes";
 
 // express on const app
 const app = express();
@@ -28,5 +29,6 @@ app.use("/api/user", routerUser);
 app.use("/api/band", routerBand);
 app.use("/api/messages", routerMessage);
 app.use("/api/admin", routerAdmin);
+app.use("/api/multitrack", routerMultitrack);
 
 export default app;
