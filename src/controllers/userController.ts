@@ -42,6 +42,17 @@ const register = async (req: Request, res: Response) => {
     const password = req.body.password;
     const img_url = req.body.img_url;
 
+     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+     const passwordRegex = /[\d()+-]/;
+
+     if (!emailRegex.test(email)) {
+       return res.json({ mensaje: 'Correo electrónico no válido' });
+     }
+     if (!passwordRegex.test(password)) {
+      return res.json({ mensaje: 'Password no válido' });
+    }
+
+
     const encryptedPassword = bcrypt.hashSync(password, 10);
 
     const newUser = await User.create({
