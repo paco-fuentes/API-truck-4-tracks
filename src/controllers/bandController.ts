@@ -184,7 +184,7 @@ const getBandByBodyId = async (req: Request, res: Response) => {
 const getBandById = async (req: Request, res: Response) => {
   try {
     const band_id = req.params.id;
-    console.log(band_id);
+    console.log('getBandById --- > ', 'band_id: ',band_id);
 
     const band = await Band.findOne({
       where: { id:parseInt(band_id as string) },

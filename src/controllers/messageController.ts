@@ -81,7 +81,9 @@ const editMessage = async (req: Request, res: Response) => {
 };
 
 const deleteMessage = async (req: Request, res: Response) => {
+  console.log('params: ', req.params.id, 'body: ',req.body.message_id, 'token: ', req.token.id);
   try {
+    
     const userId = req.token.id;
     const messageId = req.body.message_id;
 

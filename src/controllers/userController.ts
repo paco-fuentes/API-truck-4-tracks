@@ -152,7 +152,6 @@ const updateProfile = async (req: Request, res: Response) => {
     const user = await User.findOneBy({ id: req.token.id });
 
     console.log(req.body);
-    
 
     if (!user) {
       return res.status(404).json({
@@ -340,7 +339,7 @@ const checkIsBandMember = async (req: Request, res: Response) => {
   try {
     const bandId = parseInt(req.params.id);
     const userId = req.token.id;
-    console.log(bandId, userId);
+    console.log("check is member ---> ", "band: ", bandId, "user: ", userId);
 
     const bandMember = await BandMember.find({
       where: { band_id: bandId, user_id: userId },
@@ -372,7 +371,7 @@ const kickBandMember = async (req: Request, res: Response) => {
   try {
     const bandId = req.body.band_id;
     const userId = req.body.user_id;
-
+    
     console.log("bandId:", bandId);
     console.log("userId:", userId);
     console.log("bandLeader:", req.token.id);

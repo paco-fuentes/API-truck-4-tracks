@@ -65,6 +65,8 @@ const createMultitrack = async (req: Request, res: Response) => {
 
 const createTrack = async (req: Request, res: Response) => {
   try {
+    console.log(req.body);
+    
     const track_name = req.body.track_name;
     const img_url = req.body.img_url;
     const track_url = req.body.track_url;
