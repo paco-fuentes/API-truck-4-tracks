@@ -153,7 +153,7 @@ const profile = async (req: Request, res: Response) => {
 const updateProfile = async (req: Request, res: Response) => {
   try {
     const role_id = req.body.role_id;
-    const activity_id = req.body.activity_id;
+    const activity_id = req.body.activity;
     const username = req.body.username;
     const email = req.body.email;
     const password = req.body.password;
