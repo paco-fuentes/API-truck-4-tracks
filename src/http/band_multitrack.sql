@@ -1,0 +1,4 @@
+use `truck4tracks-db`;
+
+INSERT INTO `band_multitrack` (`id`,`band_id`,`project_title`,`img_url`,`is_active`,`created_at`,`updated_at`) VALUES (1,2,'Mis pistas de Hip Hop','https://occ-0-2794-2219.1.nflxso.net/dnm/api/v6/9pS1daC2n6UGc3dUogvWIPMR_OU/AAAABfuIDzjV_qpBMhdQcOLtyliQHouPeSrSUOpe0bXaBv5EH0Yjg5LXUZfBpXGTAfN3xRILgtAsTSZOBDTQ8rStJwsfX37JGt_NYNSbNcfLbiw5uEbAyWtmW-Ck.jpg?r=de7',1,'2024-01-02 10:12:26','2024-01-02 10:12:26');
+INSERT INTO `band_multitrack` (`id`,`band_id`,`project_title`,`img_url`,`is_active`,`created_at`,`updated_at`) VALUES (2,1,'Mi colección de solos de guitarra','https://images.saymedia-content.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:eco%2Cw_1200/MTkyMzcyNjgzMDg4ODY0MzU1/top-guitar-brands-for-metal.jpg',1,'2024-01-02 10:33:31','2024-01-02 10:33:31');

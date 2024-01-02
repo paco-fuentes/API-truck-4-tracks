@@ -1,0 +1,5 @@
+use `truck4tracks-db`;
+
+INSERT INTO `bands` (`id`,`band_leader`,`band_name`,`about`,`img_url`,`hiring`,`is_active`,`created_at`,`updated_at`) VALUES (1,4,'La banda de Paco','Mi banda de trash metal','https://lacarnemagazine.com/wp-content/uploads/2021/05/thrash-metal-web.jpg','hiring',1,'2024-01-02 10:00:01','2024-01-02 10:22:59');
+INSERT INTO `bands` (`id`,`band_leader`,`band_name`,`about`,`img_url`,`hiring`,`is_active`,`created_at`,`updated_at`) VALUES (2,2,'La banda de Simon','Banda de hip hop de los 80s','https://i0.wp.com/www.michigandaily.com/wp-content/uploads/2023/03/IMG_5350.png?fit=2400%2C1600&ssl=1','hiring',1,'2024-01-02 10:09:30','2024-01-02 10:11:27');
+INSERT INTO `bands` (`id`,`band_leader`,`band_name`,`about`,`img_url`,`hiring`,`is_active`,`created_at`,`updated_at`) VALUES (3,3,'Punk yeh-yeh','Sólo palos y piedras','https://media.istockphoto.com/id/1328430843/vector/girls-band.jpg?s=612x612&w=0&k=20&c=Od2--mSNnlvFsE4meO-fxNUMjvIzy4b5s4tb6ZDL_Rk=','hiring',1,'2024-01-02 10:21:09','2024-01-02 10:21:58');
