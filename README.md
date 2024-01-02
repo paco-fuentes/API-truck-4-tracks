@@ -464,7 +464,7 @@ http://localhost:4000/api/multitrack/loadtrack/1111
 
 ## License
 
-This project is under an MIT license.
+This project is under a MIT license.
 
 ## Contact
 
