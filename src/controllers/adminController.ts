@@ -36,7 +36,8 @@ const deleteUserById = async (req: Request, res: Response) => {
     if (!userToRemove) {
       return res.status(404).json({
         success: false,
-        message:"User to remove not found or you don't have permission to delete it",
+        message:
+          "User to remove not found or you don't have permission to delete it",
       });
     }
 

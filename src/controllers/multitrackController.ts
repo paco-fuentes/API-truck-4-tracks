@@ -10,18 +10,11 @@ const createMultitrack = async (req: Request, res: Response) => {
     const img_url = req.body.img_url;
     const is_active = req.body.is_active;
 
-    console.log(req.params.id, req.token.id, req.body);
-
-    // Usuario logueado
     const userId = req.token.id;
-    // ID de la banda actual
     const bandId = parseInt(req.params.id);
-    // Encuentra la banda
     const bands = await Band.findBy({
       id: bandId,
     });
-
-    // verificar si hay elementos en el array...
     if (!bands.length) {
       return res.status(404).json({
         success: false,
@@ -29,7 +22,6 @@ const createMultitrack = async (req: Request, res: Response) => {
       });
     }
     const band = bands[0];
-    // es bandleader?
     const isBandLeader = band.band_leader === userId;
 
     if (!isBandLeader) {
@@ -47,7 +39,6 @@ const createMultitrack = async (req: Request, res: Response) => {
       img_url: img_url,
       is_active: is_active,
     }).save();
-    console.log(newMultitrack);
 
     return res.json({
       success: true,
@@ -65,23 +56,14 @@ const createMultitrack = async (req: Request, res: Response) => {
 
 const createTrack = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-    
     const track_name = req.body.track_name;
     const img_url = req.body.img_url;
     const track_url = req.body.track_url;
     const is_active = req.body.is_active;
 
-    // página de la banda
     const bandId = parseInt(req.params.id);
-    // usuario logueado
     const userId = req.token.id;
-    // id del multitrack actual
     const multitrackId = req.body.id;
-    // encuentra el multitrack
-    // const multitrack = await BandMultitrack.findBy({
-    //   id: multitrackId,
-    // });
 
     const bandMember = await BandMember.find({
       where: { band_id: bandId, user_id: userId },
@@ -90,9 +72,7 @@ const createTrack = async (req: Request, res: Response) => {
     if (!bandMember) {
       return res.json({
         success: false,
-        message: bandMember
-          ? "User is band member"
-          : "User is not band member",
+        message: bandMember ? "User is band member" : "User is not band member",
       });
     }
 
@@ -104,7 +84,6 @@ const createTrack = async (req: Request, res: Response) => {
       track_url: track_url,
       is_active: is_active,
     }).save();
-    console.log(newTrack);
 
     return res.json({
       success: true,

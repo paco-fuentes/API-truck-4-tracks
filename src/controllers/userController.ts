@@ -6,7 +6,6 @@ import { User } from "../models/User";
 import { BandMember } from "../models/BandMember";
 import { Band } from "../models/Band";
 import { UserActivity } from "../models/UserActivity";
-// import { QueryFailedError } from "typeorm";
 
 const getUserActivities = async (req: Request, res: Response) => {
   try {
@@ -42,16 +41,16 @@ const register = async (req: Request, res: Response) => {
     const password = req.body.password;
     const img_url = req.body.img_url;
 
-     const emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
-     const passwordRegex = /[\d()+-]/;
+    const emailRegex =
+      /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)+$/;
+    const passwordRegex = /[\d()+-]/;
 
-     if (!emailRegex.test(email)) {
-       return res.json({ mensaje: 'Correo electrónico no válido' });
-     }
-     if (!passwordRegex.test(password)) {
-      return res.json({ mensaje: 'Password no válido' });
+    if (!emailRegex.test(email)) {
+      return res.json({ mensaje: "Correo electrónico no válido" });
     }
-
+    if (!passwordRegex.test(password)) {
+      return res.json({ mensaje: "Password no válido" });
+    }
 
     const encryptedPassword = bcrypt.hashSync(password, 10);
 
@@ -80,8 +79,6 @@ const register = async (req: Request, res: Response) => {
 
 const login = async (req: Request, res: Response) => {
   try {
-    console.log(req.body);
-
     const email = req.body.email;
     const password = req.body.password;
 
@@ -161,8 +158,6 @@ const updateProfile = async (req: Request, res: Response) => {
     const is_active = req.body.is_active;
 
     const user = await User.findOneBy({ id: req.token.id });
-
-    console.log(req.body);
 
     if (!user) {
       return res.status(404).json({
@@ -277,52 +272,6 @@ const leaveBand = async (req: Request, res: Response) => {
   }
 };
 
-// const getBandMembers = async (req: Request, res: Response) => {
-//   try {
-//     console.log(req.token);
-//     const bandLeaderId = req.token?.id;
-//     console.log(bandLeaderId);
-
-//     if (bandLeaderId === undefined) {
-//       return res.status(403).json({
-//         success: false,
-//         message: "Invalid band leader. Access denied.",
-//       });
-//     }
-
-//     const bandId = parseInt(req.params.band_id, 10);
-
-//     const isBandLeader = await Band.findOneBy({
-//       id: bandId,
-//       band_leader: bandLeaderId,
-//     });
-
-//     if (!isBandLeader) {
-//       return res.status(403).json({
-//         success: false,
-//         message: "You are not the band leader. Access denied.",
-//       });
-//     }
-
-//     const bandMembers = await BandMember.find({
-//       where: { band: { id: bandId } },
-//       relations: ["user"],
-//     });
-
-//     return res.json({
-//       success: true,
-//       message: "Band members retrieved successfully",
-//       bandMembers: bandMembers,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: "Failed to retrieve band members",
-//       error: error,
-//     });
-//   }
-// };
-
 const getBandMembers = async (req: Request, res: Response) => {
   try {
     const bandId = parseInt(req.params.band_id);
@@ -350,7 +299,6 @@ const checkIsBandMember = async (req: Request, res: Response) => {
   try {
     const bandId = parseInt(req.params.id);
     const userId = req.token.id;
-    console.log("check is member ---> ", "band: ", bandId, "user: ", userId);
 
     const bandMember = await BandMember.find({
       where: { band_id: bandId, user_id: userId },
@@ -382,10 +330,6 @@ const kickBandMember = async (req: Request, res: Response) => {
   try {
     const bandId = req.body.band_id;
     const userId = req.body.user_id;
-    
-    console.log("bandId:", bandId);
-    console.log("userId:", userId);
-    console.log("bandLeader:", req.token.id);
 
     const band = await Band.findOne({
       where: { id: bandId },
@@ -407,7 +351,7 @@ const kickBandMember = async (req: Request, res: Response) => {
         message: "You are not the band leader. Access denied.",
       });
     }
-    // revisar, no hace falta
+
     await band.reload();
 
     console.log("All Band Members:", band.members);
@@ -437,7 +381,6 @@ const kickBandMember = async (req: Request, res: Response) => {
     return res.status(500).json({
       success: false,
       message: "Failed to kick user from the band",
-      // error: error.message,
     });
   }
 };

@@ -7,11 +7,6 @@ const postMessage = async (req: Request, res: Response) => {
     const userId = req.token.id;
     const bandId = parseInt(req.params.id);
     const { message } = req.body;
-    console.log(
-      "band id: " + bandId,
-      "user id: " + userId,
-      "mensaje: " + message
-    );
 
     const isMember = await BandMember.findOne({
       where: { user_id: userId, band_id: bandId },
@@ -81,9 +76,7 @@ const editMessage = async (req: Request, res: Response) => {
 };
 
 const deleteMessage = async (req: Request, res: Response) => {
-  console.log('params: ', req.params.id, 'body: ',req.body.message_id, 'token: ', req.token.id);
   try {
-    
     const userId = req.token.id;
     const messageId = req.body.message_id;
 

@@ -15,9 +15,6 @@ const createBand = async (req: Request, res: Response) => {
     const hiring = req.body.hiring;
     const is_active = req.body.is_active;
 
-    console.log(req.body);
-
-    // create band
     const newBand = await Band.create({
       band_leader: band_leader,
       band_name: band_name,
@@ -27,7 +24,6 @@ const createBand = async (req: Request, res: Response) => {
       is_active: is_active,
     }).save();
 
-    // create and member
     const bandMember = await BandMember.create({
       band_id: newBand.id,
       user_id: band_leader,
@@ -55,13 +51,6 @@ const getUserBandByTokenId = async (req: Request, res: Response) => {
   try {
     const user_id = req.token.id;
     const userBand = await Band.findOne({ where: { band_leader: user_id } });
-
-    // if (!userBand) {
-    //   return res.status(404).json({
-    //     success: false,
-    //     message: "user's band not found",
-    //   });
-    // }
 
     const bandMultitracks = await BandMultitrack.find({
       where: { band_id: userBand?.id },
@@ -137,24 +126,6 @@ const getAllBands = async (req: Request, res: Response) => {
   }
 };
 
-// const getAllBands = async (req: Request, res: Response) => {
-//   try {
-//     const bands = await Band.find();
-
-//     return res.json({
-//       success: true,
-//       message: "All bands retrieved successfully",
-//       data: bands,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       success: false,
-//       message: "Bands can't be retrieved",
-//       error: error,
-//     });
-//   }
-// };
-
 const getBandByBodyId = async (req: Request, res: Response) => {
   try {
     const band_id = req.body.band_id;
@@ -184,10 +155,9 @@ const getBandByBodyId = async (req: Request, res: Response) => {
 const getBandById = async (req: Request, res: Response) => {
   try {
     const band_id = req.params.id;
-    console.log('getBandById --- > ', 'band_id: ',band_id);
 
     const band = await Band.findOne({
-      where: { id:parseInt(band_id as string) },
+      where: { id: parseInt(band_id as string) },
     });
 
     if (!band) {
@@ -198,7 +168,7 @@ const getBandById = async (req: Request, res: Response) => {
     }
 
     const bandMultitracks = await BandMultitrack.find({
-      where: { band_id: band_id as any},
+      where: { band_id: band_id as any },
     });
     const trackPromises = bandMultitracks.map(async (multitrack) => {
       const tracks = await Track.find({
@@ -226,4 +196,10 @@ const getBandById = async (req: Request, res: Response) => {
   }
 };
 
-export { createBand, getUserBandByTokenId, getAllBands, getBandById, getBandByBodyId };
+export {
+  createBand,
+  getUserBandByTokenId,
+  getAllBands,
+  getBandById,
+  getBandByBodyId,
+};
