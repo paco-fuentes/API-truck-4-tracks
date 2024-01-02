@@ -61,7 +61,6 @@ const register = async (req: Request, res: Response) => {
       password: encryptedPassword,
       img_url: img_url,
     }).save();
-    console.log(newUser);
 
     return res.json({
       success: true,
@@ -354,13 +353,9 @@ const kickBandMember = async (req: Request, res: Response) => {
 
     await band.reload();
 
-    console.log("All Band Members:", band.members);
-
     const bandMember = band.members.find(
       (member) => member.user && member.user.id === userId
     );
-
-    console.log("Found Band Member:", bandMember);
 
     if (!bandMember) {
       return res.status(404).json({
